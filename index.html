@@ -11,7 +11,21 @@
       overflow: hidden;
       height: 100%;
       background-color: #000;
+      font-family: Arial, sans-serif;
     }
+
+    #contador {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #00ff88;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 18px;
+      z-index: 9999;
+    }
+
     iframe {
       border: none;
       width: 100%;
@@ -20,6 +34,9 @@
   </style>
 </head>
 <body>
+
+  <div id="contador">Refrescando en: 180 s</div>
+
   <iframe
     id="powerbi"
     title="prueba tv3"
@@ -28,11 +45,22 @@
   </iframe>
 
   <script>
-    // Recargar el iframe (solo el tablero) cada 3 minutos
-    setInterval(() => {
-      const iframe = document.getElementById('powerbi');
-      iframe.src = iframe.src; // Esto forza la recarga del contenido
-    }, 3 * 60 * 1000); // 3 minutos en milisegundos
+    let segundos = 180;
+    const contador = document.getElementById("contador");
+    const iframe = document.getElementById("powerbi");
+
+    function actualizarContador() {
+      contador.textContent = `Refrescando en: ${segundos} s`;
+      if (segundos === 0) {
+        iframe.src = iframe.src; // recarga el Power BI
+        segundos = 180;
+      } else {
+        segundos--;
+      }
+    }
+
+    // Actualiza cada segundo
+    setInterval(actualizarContador, 1000);
   </script>
 </body>
 </html>
