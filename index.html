@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tablero Power BI</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #000;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    id="powerbi"
+    title="prueba tv3"
+    src="https://app.powerbi.com/reportEmbed?reportId=d571a686-0687-4e58-b310-10b5fa7e612a&autoAuth=true&ctid=f6b64c2d-6654-4818-8f7d-85896181d525"
+    allowfullscreen="true">
+  </iframe>
+
+  <script>
+    // Recargar el iframe (solo el tablero) cada 3 minutos
+    setInterval(() => {
+      const iframe = document.getElementById('powerbi');
+      iframe.src = iframe.src; // Esto forza la recarga del contenido
+    }, 3 * 60 * 1000); // 3 minutos en milisegundos
+  </script>
+</body>
+</html>
